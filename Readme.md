@@ -1,0 +1,3 @@
+# canvas: A Ruby interface to the Instructure Canvas JSON API #
+
+canvas is a Ruby library (soon to be gem) that interfaces with the Instructure Canvas JSON API.  canvas is not currently finished, although some rudimentary functionality is complete.  Usage instructions and documentation will come when canvas is complete.  For now, check out the source, which is pretty self-explanatory, to see how to use canvas.
