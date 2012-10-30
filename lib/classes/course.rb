@@ -1,5 +1,5 @@
 class Course < Canvas
-  attr_accessor :id, :sis_course_id, :name, :course_code, :account_id, :start_at, :end_at, :enrollments, :course_calendar, :syllabus_body_html, :folders, :assignments, :pages
+  attr_accessor :id, :sis_course_id, :name, :course_code, :account_id, :start_at, :end_at, :enrollments, :course_calendar, :syllabus_body_html, :folders, :assignments, :pages, :discussion_topics
   
   def initialize(id, params)
     @id = id
@@ -8,12 +8,8 @@ class Course < Canvas
                folders pages)
     attrs.each { |attr| self.instance_variable_set("@#{attr}", params[attr]) unless attr == "id" }
     
-    @api_course_assignments_url = "#{@@api_root_url}/courses/#{self.id}/assignments"
-    assignments_json = self.get_json(@api_course_assignments_url)
-    @assignments = []
-    assignments_json.each do |assignment|
-      @assignments << Assignment.new(assignment["id"], assignment)
-    end
+    get_assignments; get_dt #Speed this up
+    #get_dt
   end
   
   def pages
@@ -22,6 +18,30 @@ class Course < Canvas
     pages_json = self.get_json(@api_page_url)
     pages_json.each { |page_json| @pages << Page.new(page_json) }
     @pages
+  end
+  
+  private
+  def get_assignments
+    api_course_assignments_url = "#{@@api_root_url}/courses/#{self.id}/assignments"
+    @assignments = []
+    begin
+      assignments_json = self.get_json(api_course_assignments_url)
+    rescue RestClient::Unauthorized => e
+    else
+      assignments_json.each do |assignment|
+        @assignments << Assignment.new(assignment["id"], assignment)
+      end
+      @assignments
+    end
+  end
+  
+  private
+  def get_dt
+    api_course_discussion_topics_url = "#{@@api_root_url}/courses/#{self.id}/discussion_topics"
+    dt_json = self.get_json(api_course_discussion_topics_url)
+    @discussion_topics = []
+    dt_json.each { |dt| @discussion_topics << DiscussionTopic.new(dt['id'], dt) }
+    @discussion_topics
   end
   
 end

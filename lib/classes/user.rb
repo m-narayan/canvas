@@ -1,7 +1,7 @@
 class User < Canvas
   attr_accessor :id, :name, :sortable_name, :short_name, :login_id, :avatar_url,
                 :primary_email, :locale, :last_login, :favorites,
-                :groups, :courses
+                :groups, :courses, :conversations
   
   def initialize(id = nil)
     unless id.nil?
@@ -49,6 +49,15 @@ class User < Canvas
     @groups
   end
   
+  def conversations
+    @conversations = []
+    conversations_url = "#{@@api_root_url}/conversations"
+    response_json = self.get_json(conversations_url)
+    response_json.each do |conversation|
+      @conversations << Conversation.new(conversation['id'], conversation)
+    end
+    @conversations
+  end
   
 end
 
