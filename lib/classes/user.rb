@@ -3,6 +3,10 @@ class User < Canvas
                 :primary_email, :locale, :last_login, :favorites,
                 :groups, :courses, :conversations
 
+  def self.test
+    puts "arrivu"
+  end       
+
   def list_courses
     api_user_url = "https://192.168.1.40/api/v1/courses"
     response_json =JSON.parse(RestClient.get api_user_url, {:params => {:access_token => "DBzxyOO2xzYNwNbjgjEh4MCxtgYbKTfS4gRTWuDSskY3H1LnzHECJhygZN0RW73h"}})

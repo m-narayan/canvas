@@ -4,6 +4,10 @@ require 'json'
 class Canvas
   attr_accessor :oauth_token, :courses
   
+  def self.hello
+    puts "hello"
+  end
+
   def initialize(oauth_token, api_root_url = "https://wharton.instructure.com/api/v1")
     @@oauth_token = oauth_token
     @@api_root_url = api_root_url
