@@ -6,9 +6,6 @@ class User < Canvas
   def list_courses
     api_user_url = "https://192.168.1.40/api/v1/courses"
     response_json =JSON.parse(RestClient.get api_user_url, {:params => {:access_token => "DBzxyOO2xzYNwNbjgjEh4MCxtgYbKTfS4gRTWuDSskY3H1LnzHECJhygZN0RW73h"}})
-    response_json.each do |user|
-      logger.debug user["name"]
-    end
     @response=response_json
   end                
   
