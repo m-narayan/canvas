@@ -1,13 +1,15 @@
-class Course < Canvas
-  attr_accessor :id, :sis_course_id, :name, :course_code, :account_id, :start_at, :end_at, :enrollments, :course_calendar, :syllabus_body_html, :folders, :assignments, :pages, :discussion_topics
-  
-  def initialize(id, params)
-    @id = id
-    attrs = %w(id sis_course_id name course_code account_id start_at
-               end_at enrollments course_calendar syllabus_body_html
-               folders pages)
-    attrs.each { |attr| self.instance_variable_set("@#{attr}", params[attr]) unless attr == "id" }
+module CanvasREST
+  class Course < Canvas
+    attr_accessor :id, :sis_course_id, :name, :course_code, :account_id, :start_at, :end_at, :enrollments, :course_calendar, :syllabus_body_html, :folders, :assignments, :pages, :discussion_topics
+
     
+    def initialize(id, params)
+      @id = id
+      attrs = %w(id sis_course_id name course_code account_id start_at
+       end_at enrollments course_calendar syllabus_body_html
+       folders pages)
+attrs.each { |attr| self.instance_variable_set("@#{attr}", params[attr]) unless attr == "id" }
+
     get_assignments; get_dt #Speed this up
     #get_dt
   end
@@ -56,4 +58,6 @@ end
 
 class CanvasModuleItem < Canvas
   attr_accessor :id, :position, :title, :indent_level, :type, :html_url, :canvas_api_url, :completion_requirement
+end
+
 end
