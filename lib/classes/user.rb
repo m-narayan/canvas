@@ -16,19 +16,19 @@ module CanvasREST
     end                
 
     def initialize(id = nil)
-#       unless id.nil?
-#         @id = id
-#         @api_user_url = "#{@@api_root_url}/users/#{id}/profile"
-#       else
-#         @api_user_url = "#{@@api_root_url}/users/self/profile"
-#       end
+      unless id.nil?
+        @id = id
+        @api_user_url = "#{@@api_root_url}/users/#{id}/profile"
+      else
+        @api_user_url = "#{@@api_root_url}/users/self/profile"
+      end
 
-#       response_json = self.get_json(@api_user_url)
-#       attrs = %w(id name sortable_name short_name login_id avatar_url
-#        primary_email locale last_login favorites
-#        groups courses)
-# attrs.each { |attr| self.instance_variable_set("@#{attr}", response_json[attr]) unless attr == "id" and !(@id.nil?) }
-# @api_user_url = "#{@@api_root_url}/users/#{self.id}/profile"
+      response_json = self.get_json(@api_user_url)
+      attrs = %w(id name sortable_name short_name login_id avatar_url
+       primary_email locale last_login favorites
+       groups courses)
+attrs.each { |attr| self.instance_variable_set("@#{attr}", response_json[attr]) unless attr == "id" and !(@id.nil?) }
+@api_user_url = "#{@@api_root_url}/users/#{self.id}/profile"
 end
 
 def courses
