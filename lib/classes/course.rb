@@ -13,6 +13,12 @@ attrs.each { |attr| self.instance_variable_set("@#{attr}", params[attr]) unless 
     #get_assignments; get_dt #Speed this up
     #get_dt
   end
+
+  def self.create_course(name)
+    url = "#{@@api_root_url}/accounts/1/courses"
+    data = {"account_id"=>"1","course" => { "name" => name }}
+    RestClient.post url,data, "Authorization" => "Bearer #{@@oauth_token}" 
+  end
   
   def pages
     @pages = []
