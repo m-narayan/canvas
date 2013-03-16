@@ -9,7 +9,7 @@ require 'json'
       puts "hello"
     end
 
-    def initialize())
+    def initialize()
       @@oauth_token = "DBzxyOO2xzYNwNbjgjEh4MCxtgYbKTfS4gRTWuDSskY3H1LnzHECJhygZN0RW73h"
       @@api_root_url = "https://192.168.1.40/"
     end
