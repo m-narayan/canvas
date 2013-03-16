@@ -10,7 +10,7 @@ module CanvasREST
        folders pages)
 attrs.each { |attr| self.instance_variable_set("@#{attr}", params[attr]) unless attr == "id" }
 
-    get_assignments; get_dt #Speed this up
+    #get_assignments; get_dt #Speed this up
     #get_dt
   end
   
