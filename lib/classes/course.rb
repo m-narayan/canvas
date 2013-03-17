@@ -28,6 +28,14 @@ attrs.each { |attr| self.instance_variable_set("@#{attr}", params[attr]) unless 
     @pages
   end
   
+  def modules
+    modules = []
+    @api_module_url = "#{@@api_root_url}/courses/#{self.id}/modules"    
+    modules_json = self.get_json(@api_module_url)
+    modules_json.each { |module_json| @modules << Module.new(self.id, module_json) }
+    @modules    
+  end
+  
   private
   def get_assignments
     api_course_assignments_url = "#{@@api_root_url}/courses/#{self.id}/assignments"
