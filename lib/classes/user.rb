@@ -4,10 +4,21 @@ module CanvasREST
     :primary_email, :locale, :last_login, :favorites,
     :groups, :courses, :conversations
 
-    def self.create_user
-      url = "#{@@api_root_url}/accounts/1/users"
-      data = {"user" => { "name" => "Murukesan S" },"pseudonym" =>{"unique_id" => "murukesan@arrivusystems.com","password" =>"Sukumar123$"}}
-      RestClient.post url,data, "Authorization" => "Bearer #{@@oauth_token}" 
+    def create_user(account_id,name,unique_id,password)
+      url = "#{@@api_root_url}/accounts/#{account_id}/users"
+      data = {"user" => { "name" => name },"pseudonym" =>{"unique_id" => unique_id,"password" =>password}}
+      user=JSON.parse(RestClient.post url,data, "Authorization" => "Bearer #{@@oauth_token}")
+    end
+
+    def update_user(id,name)
+      url = "#{@@api_root_url}/users/#{id}"
+      data = {"user" => { "name" => name }}
+      RestClient.put url,data, "Authorization" => "Bearer #{@@oauth_token}" 
+    end
+
+    def delete_user(account_id,id)
+      url = "#{@@api_root_url}/accounts/#{account_id}/users/#{id}"
+      RestClient.delete url, "Authorization" => "Bearer #{@@oauth_token}" 
     end
 
     def courses

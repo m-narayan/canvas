@@ -2,6 +2,7 @@ module CanvasREST
   class Course < Canvas
     attr_accessor :id, :sis_course_id, :name, :course_code, :account_id, :start_at, :end_at, :enrollments, :course_calendar, :syllabus_body_html, :folders, :assignments, :pages, :discussion_topics
 
+
     def create_course(account_id,sis_course_id,name,code="",public_description="")
       url = "#{@@api_root_url}/accounts/#{account_id}/courses"
       data = {"account_id"=>account_id,"course" => { "sis_course_id" => sis_course_id,"name" => name, "code" => code, "public_description" => public_description }}
