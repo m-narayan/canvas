@@ -3,7 +3,7 @@ module CanvasREST
     attr_accessor :id, :sis_course_id, :name, :course_code, :account_id, :start_at, :end_at, :enrollments, :course_calendar, :syllabus_body_html, :folders, :assignments, :pages, :discussion_topics
 
     
-    def initialize(id, params)
+    def initialize_bak(id, params)
       @id = id
       attrs = %w(id sis_course_id name course_code account_id start_at
        end_at enrollments course_calendar syllabus_body_html
@@ -14,9 +14,9 @@ attrs.each { |attr| self.instance_variable_set("@#{attr}", params[attr]) unless 
     #get_dt
   end
 
-  def self.create_course(name)
-    url = "#{@@api_root_url}/accounts/1/courses"
-    data = {"account_id"=>"1","course" => { "name" => name }}
+  def create_course(account_id,name)
+    url = "#{@@api_root_url}/accounts/#{account_id}/courses"
+    data = {"account_id"=>account_id,"course" => { "name" => name }}
     RestClient.post url,data, "Authorization" => "Bearer #{@@oauth_token}" 
   end
   

@@ -20,7 +20,12 @@ attrs.each { |attr| self.instance_variable_set("@#{attr}", response_json[attr]) 
 @api_user_url = "#{@@api_root_url}/users/#{self.id}/profile"
 end
 
-
+def self.create_user
+  url = "#{@@api_root_url}/accounts/1/users"
+  #data = {"user" => { "name" => "Sukumar Reddy A" },"pseudonym" =>{"unique_id" => "sukumar@arrivusystems.com","password" =>"Sukumar123$"}}
+  data = {"user" => { "name" => "Murukesan S" },"pseudonym" =>{"unique_id" => "murukesan@arrivusystems.com","password" =>"Sukumar123$"}}
+  RestClient.post url,data, "Authorization" => "Bearer #{@@oauth_token}" 
+end
 
 def courses
   @api_course_url = "#{@@api_root_url}/courses"
