@@ -4,8 +4,8 @@ Gem::Specification.new do |s|
   s.date        = '2013-03-15'
   s.summary     = "Canvas REST!"
   s.description = "Canvas REST"
-  s.authors     = ["Manickomn"]
-  s.email       = 'mani.narayn@arrivusystems.com'
+  s.authors     = ["arrivusystems"]
+  s.email       = 'admin@arrivusystems.com'
   s.files       = `git ls-files`.split("\n")  
   s.homepage    = 'http://arrivusystems.com'
 end
