@@ -9,6 +9,9 @@ module CanvasREST
       RestClient.post url,data, "Authorization" => "Bearer #{@@oauth_token}" 
     end  
 
+    def enroll_user
+    end
+
     def initialize_bak(id, params)
       @id = id
       attrs = %w(id sis_course_id name course_code account_id start_at
