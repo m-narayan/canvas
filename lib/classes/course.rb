@@ -3,22 +3,14 @@ module CanvasREST
     attr_accessor :id, :sis_course_id, :name, :course_code, :account_id, :start_at, :end_at, :enrollments, :course_calendar, :syllabus_body_html, :folders, :assignments, :pages, :discussion_topics
 
 
-    def create_course(account_id,sis_course_id,name,code="",public_description="")
-      url = "#{@@api_root_url}/accounts/#{account_id}/courses"
-      data = {"account_id"=>account_id,"course" => { "sis_course_id" => sis_course_id,"name" => name, "code" => code, "public_description" => public_description }}
-      RestClient.post url,data, "Authorization" => "Bearer #{@@oauth_token}" 
-    end  
-
-    def enroll_user
-    end
-
-    def initialize_bak(id, params)
-      @id = id
-      attrs = %w(id sis_course_id name course_code account_id start_at
-       end_at enrollments course_calendar syllabus_body_html
-       folders pages)
-attrs.each { |attr| self.instance_variable_set("@#{attr}", params[attr]) unless attr == "id" }
-
+     def initialize(id=nil, params=[])
+      if id!=nil 
+        @id = id
+        attrs = %w(id sis_course_id name course_code account_id start_at
+         end_at enrollments course_calendar syllabus_body_html
+         folders pages)
+  attrs.each { |attr| self.instance_variable_set("@#{attr}", params[attr]) unless attr == "id" }
+      end
     #get_assignments; get_dt #Speed this up
     #get_dt
   end

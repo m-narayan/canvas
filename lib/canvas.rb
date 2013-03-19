@@ -3,8 +3,9 @@ require 'json'
 
 class Canvas
   attr_accessor :oauth_token, :courses
-  
-  def initialize(oauth_token = "DBzxyOO2xzYNwNbjgjEh4MCxtgYbKTfS4gRTWuDSskY3H1LnzHECJhygZN0RW73h", api_root_url = "https://192.168.1.40/api/v1")
+
+   
+  def set_token(oauth_token = "tKmI8hGorLtmUk2xCNHilSipYPJ1oCJ367qHeEWA8PMjJtY6LZurLeNPCJKa65TS", api_root_url = "https://192.168.1.40/api/v1")
     @@oauth_token = oauth_token
     @@api_root_url = api_root_url
   end

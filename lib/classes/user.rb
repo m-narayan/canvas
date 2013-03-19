@@ -21,6 +21,12 @@ module CanvasREST
       RestClient.delete url, "Authorization" => "Bearer #{@@oauth_token}" 
     end
 
+    def create_course(account_id,sis_course_id,name,code="",public_description="")
+      url = "#{@@api_root_url}/accounts/#{account_id}/courses"
+      data = {"account_id"=>account_id,"course" => { "sis_course_id" => sis_course_id,"name" => name, "code" => code, "public_description" => public_description }}
+      RestClient.post url,data, "Authorization" => "Bearer #{@@oauth_token}" 
+    end  
+
     def courses
       @api_course_url = "#{@@api_root_url}/courses"
       response_json = self.get_json(@api_course_url)
