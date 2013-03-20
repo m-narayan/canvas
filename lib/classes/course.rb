@@ -26,6 +26,19 @@ end
     data = {"account_id"=>account_id,"course" => { "sis_course_id" => sis_course_id,"name" => name, "code" => code, "public_description" => public_description }}
     RestClient.post url,data, "Authorization" => "Bearer #{@@oauth_token}" 
   end  
+  
+  def modules
+    modules = []
+    @api_module_url = "#{@@api_root_url}/courses/#{self.id}/modules"    
+    modules_json = self.get_json(@api_module_url)
+    @modules=[]
+    modules_json.each do |modulep|
+      @modules << Module2.new(modulep["id"], modulep) 
+      puts modulep["id"]
+      puts modulep["name"]
+    end
+    #@modules    
+  end
 
   def pages
     @pages = []
@@ -35,13 +48,7 @@ end
     @pages
   end
   
-  def modules
-    modules = []
-    @api_module_url = "#{@@api_root_url}/courses/#{self.id}/modules"    
-    modules_json = self.get_json(@api_module_url)
-    modules_json.each { |module_json| @modules << Module.new(self.id, module_json) }
-    @modules    
-  end
+  
   
   private
   def get_assignments
