@@ -1,3 +1,5 @@
+#gem build canvas.gemspec
+#gem install canvas-0.0.0.gem
 require 'rest_client'
 require 'json'
 
@@ -5,7 +7,7 @@ class Canvas
   attr_accessor :oauth_token, :courses
 
    
-  def set_token(oauth_token = "tKmI8hGorLtmUk2xCNHilSipYPJ1oCJ367qHeEWA8PMjJtY6LZurLeNPCJKa65TS", api_root_url = "https://192.168.1.40/api/v1")
+  def set_token(oauth_token = "BWByYxU7pnqLi6lWICmGcYGn66xuaZEAsImJgLgUsmj3hSkoTK5UzCFesmZUdQDx", api_root_url = "https://192.168.1.40/api/v1")
     @@oauth_token = oauth_token
     @@api_root_url = api_root_url
   end
