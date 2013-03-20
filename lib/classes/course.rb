@@ -33,11 +33,9 @@ end
     modules_json = self.get_json(@api_module_url)
     @modules=[]
     modules_json.each do |modulep|
-      @modules << Module2.new(modulep["id"], modulep) 
-      puts modulep["id"]
-      puts modulep["name"]
+      @modules << Module.new(self.id, modulep) 
     end
-    #@modules    
+    @modules    
   end
 
   def pages

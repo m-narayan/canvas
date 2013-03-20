@@ -1,11 +1,11 @@
 module CanvasREST
-  class Module2 < Canvas    
+  class Module < Canvas    
     attr_accessor :id, :position, :name, :unlock_at, :require_sequential_progress, :prerequisite_module_ids, :state, :completed_at, :module_items
      
-  def initialize(id, params)    
-    @id = id
-    attrs = %w(id, position, name, unlock_at, require_sequential_progress, prerequisite_module_ids, state, completed_at, :module_items)
-    attrs.each { |attr| self.instance_variable_set("@#{attr}", params[attr]) unless attr == "id" }
+  def initialize(course_id, params)    
+    @course_id = course_id
+    attrs = %w(id position name unlock_at require_sequential_progress prerequisite_module_ids state completed_at module_items)
+    attrs.each { |attr| self.instance_variable_set("@#{attr}", params[attr]) }
   end
     
     # // the unique identifier for the module
