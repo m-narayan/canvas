@@ -36,7 +36,7 @@ end
   def delete_course(id)
     url = "#{@@api_root_url}/courses/#{id}"
     data = {"event" =>"delete"}
-    RestClient.delete url,data, "Authorization" => "Bearer #{@@oauth_token}" 
+    RestClient.delete url, "Authorization" => "Bearer #{@@oauth_token}" 
   end  
   
   def modules
