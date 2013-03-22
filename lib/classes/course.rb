@@ -26,6 +26,17 @@ end
     data = {"account_id"=>account_id,"course" => { "sis_course_id" => sis_course_id,"name" => name, "public_description" => public_description }}
     JSON.parse(RestClient.post url,data, "Authorization" => "Bearer #{@@oauth_token}") 
   end  
+
+  def update_course(id,name,public_description)
+    url = "#{@@api_root_url}/courses/#{id}"
+    data = {"course" => { "name" => name, "public_description" => public_description }}
+    JSON.parse(RestClient.put url,data, "Authorization" => "Bearer #{@@oauth_token}") 
+  end  
+
+  def delete_course(id)
+    url = "#{@@api_root_url}/courses/#{id}"
+    RestClient.delete url, "Authorization" => "Bearer #{@@oauth_token}" 
+  end  
   
   def modules
     modules = []
