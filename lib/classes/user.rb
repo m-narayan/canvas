@@ -7,7 +7,7 @@ module CanvasREST
     def create_user(account_id,name,unique_id,password)
       url = "#{@@api_root_url}/accounts/#{account_id}/users"
       data = {"user" => { "name" => name },"pseudonym" =>{"unique_id" => unique_id,"password" =>password}}
-      user=JSON.parse(RestClient.post url,data, "Authorization" => "Bearer #{@@oauth_token}")
+      JSON.parse(RestClient.post url,data, "Authorization" => "Bearer #{@@oauth_token}")
     end
 
     def update_user(id,name)

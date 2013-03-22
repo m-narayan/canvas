@@ -24,7 +24,7 @@ end
   def create_course(account_id,sis_course_id,name,public_description)
     url = "#{@@api_root_url}/accounts/#{account_id}/courses"
     data = {"account_id"=>account_id,"course" => { "sis_course_id" => sis_course_id,"name" => name, "public_description" => public_description }}
-    course=JSON.parse(RestClient.post url,data, "Authorization" => "Bearer #{@@oauth_token}") 
+    JSON.parse(RestClient.post url,data, "Authorization" => "Bearer #{@@oauth_token}") 
   end  
   
   def modules
