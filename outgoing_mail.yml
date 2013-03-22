@@ -1,0 +1,11 @@
+production:
+  address: "smtp.gmail.com"
+  port: "587"
+  user_name: "arrivu.lms@gmail.com"
+  password: "lmsadmin"
+  authentication: "plain" # plain, login, or cram_md5
+  domain: "arrivungl.servehttp.com"
+  outgoing_address: "arrivu.lms@gmail.com"
+  default_name: "Arrivu lms admin"
+  tls: true
+

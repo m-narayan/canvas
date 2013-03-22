@@ -60,7 +60,7 @@ module CanvasREST
     
     def initialize(course_id, module_id, params) 
       @course_id = course_id   
-      attrs = %w(id, position, title, indent_level, type, html_url, canvas_api_url, completion_requirement)
+      attrs = %w(id position title indent_level type html_url canvas_api_url completion_requirement)
       attrs.each { |attr| self.instance_variable_set("@#{attr}", params[attr]) }
     end
   end
