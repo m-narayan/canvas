@@ -34,8 +34,7 @@ end
   end  
 
   def delete_course(id)
-    url = "#{@@api_root_url}/courses/#{id}"
-    data = {"event" =>"delete"}
+    url = "#{@@api_root_url}/courses/#{id}?event=delete"
     RestClient.delete url, "Authorization" => "Bearer #{@@oauth_token}" 
   end  
   
