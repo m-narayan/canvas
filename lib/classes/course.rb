@@ -33,6 +33,18 @@ end
     JSON.parse(RestClient.put url,data, "Authorization" => "Bearer #{@@oauth_token}") 
   end  
 
+  def enroll_user(course_id,user_id)
+    url = "#{@@api_root_url}/courses/#{course_id}/enrollments"
+    data = {"enrollment" => { "user_id" => user_id,"type" => "StudentEnrollment"}}
+    JSON.parse(RestClient.post url,data, "Authorization" => "Bearer #{@@oauth_token}") 
+  end  
+
+  def conclude_enrollment(course_id,user_id)
+    url = "#{@@api_root_url}/courses/#{course_id}/enrollments/#{user_id}?task=conclude"
+    RestClient.delete url, "Authorization" => "Bearer #{@@oauth_token}" 
+  end  
+
+
   def delete_course(id)
     url = "#{@@api_root_url}/courses/#{id}?event=delete"
     RestClient.delete url, "Authorization" => "Bearer #{@@oauth_token}" 
