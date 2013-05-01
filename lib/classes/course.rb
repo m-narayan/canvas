@@ -33,9 +33,9 @@ end
     JSON.parse(RestClient.put url,data, "Authorization" => "Bearer #{@@oauth_token}") 
   end  
 
-  def enroll_user(course_id,user_id)
+  def enroll_user(course_id,user_id, type = "StudentEnrollment", enrollment_state = "active",  notify = 0)
     url = "#{@@api_root_url}/courses/#{course_id}/enrollments"
-    data = {"enrollment" => { "user_id" => user_id,"type" => "StudentEnrollment"}}
+    data = {"enrollment" => { "user_id" => user_id, "type" => type, "enrollment_state" => enrollment_state, "notify" => notify }}
     JSON.parse(RestClient.post url,data, "Authorization" => "Bearer #{@@oauth_token}") 
   end  
 
