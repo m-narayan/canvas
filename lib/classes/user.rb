@@ -7,7 +7,9 @@ module CanvasREST
     def create_user(account_id,name,unique_id,password,api_root_url,oauth_token)
       url = "#{api_root_url}/accounts/#{account_id}/users"
       data = {"user" => { "name" => name },"pseudonym" =>{"unique_id" => unique_id,"password" =>password}}
-      JSON.parse(RestClient.post url,data, "Authorization" => "Bearer #{oauth_token}")
+      response=JSON.parse(RestClient.post url,data, "Authorization" => "Bearer #{oauth_token}")
+      user= ActiveRecord::Base::User.find_by_email(unique_id)
+      user.update_attributes(:lms_id => response["id"])
     end
 
     def update_user(id,name)

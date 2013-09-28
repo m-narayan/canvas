@@ -21,38 +21,40 @@ end
       Course.new(response_json["id"], response_json)
   end
 
-  def create_course(account_id,sis_course_id,name,public_description)
+  def create_course(account_id,sis_course_id,name,public_description,api_root_url,oauth_token)
     url = "#{@@api_root_url}/accounts/#{account_id}/courses"
     data = {"account_id"=>account_id,"course" => { "sis_course_id" => sis_course_id,"name" => name, "public_description" => public_description }}
-    JSON.parse(RestClient.post url,data, "Authorization" => "Bearer #{@@oauth_token}") 
+    response = JSON.parse(RestClient.post url,data, "Authorization" => "Bearer #{@@oauth_token}")
+    course= ActiveRecord::Base::Course.find(sis_course_id)
+    course.update_attributes(:lms_id => response["id"])
   end  
 
-  def update_course(id,name,public_description)
-    url = "#{@@api_root_url}/courses/#{id}"
+  def update_course(id,name,public_description,api_root_url,oauth_token)
+    url = "#{api_root_url}/courses/#{id}"
     data = {"course" => { "name" => name, "public_description" => public_description }}
-    JSON.parse(RestClient.put url,data, "Authorization" => "Bearer #{@@oauth_token}") 
+    JSON.parse(RestClient.put url,data, "Authorization" => "Bearer #{oauth_token}")
   end  
 
-  def enroll_user(course_id,user_id, type = "StudentEnrollment", enrollment_state = "active",  notify = 0)
-    url = "#{@@api_root_url}/courses/#{course_id}/enrollments"
+  def enroll_user(course_id,user_id,api_root_url,oauth_token,type = "StudentEnrollment", enrollment_state = "active",  notify = 0)
+    url = "#{api_root_url}/courses/#{course_id}/enrollments"
     data = {"enrollment" => { "user_id" => user_id, "type" => type, "enrollment_state" => enrollment_state, "notify" => notify }}
-    JSON.parse(RestClient.post url,data, "Authorization" => "Bearer #{@@oauth_token}") 
+    JSON.parse(RestClient.post url,data, "Authorization" => "Bearer #{oauth_token}")
   end  
 
-  def conclude_enrollment(course_id,user_id)
-    url = "#{@@api_root_url}/courses/#{course_id}/enrollments/#{user_id}?task=conclude"
-    RestClient.delete url, "Authorization" => "Bearer #{@@oauth_token}" 
+  def conclude_enrollment(course_id,user_id,api_root_url,oauth_token)
+    url = "#{api_root_url}/courses/#{course_id}/enrollments/#{user_id}?task=conclude"
+    RestClient.delete url, "Authorization" => "Bearer #{oauth_token}"
   end  
 
 
-  def delete_course(id)
-    url = "#{@@api_root_url}/courses/#{id}?event=delete"
-    RestClient.delete url, "Authorization" => "Bearer #{@@oauth_token}" 
+  def delete_course(id,api_root_url,oauth_token)
+    url = "#{api_root_url}/courses/#{id}?event=delete"
+    RestClient.delete url, "Authorization" => "Bearer #{oauth_token}"
   end  
 
-  def conclude_course(id)
-    url = "#{@@api_root_url}/courses/#{id}?event=conclude"
-    RestClient.delete url, "Authorization" => "Bearer #{@@oauth_token}" 
+  def conclude_course(id,api_root_url,oauth_token)
+    url = "#{api_root_url}/courses/#{id}?event=conclude"
+    RestClient.delete url, "Authorization" => "Bearer #{oauth_token}"
   end  
   
   def modules
