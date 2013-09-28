@@ -22,9 +22,9 @@ end
   end
 
   def create_course(account_id,sis_course_id,name,public_description,api_root_url,oauth_token)
-    url = "#{@@api_root_url}/accounts/#{account_id}/courses"
+    url = "#{api_root_url}/accounts/#{account_id}/courses"
     data = {"account_id"=>account_id,"course" => { "sis_course_id" => sis_course_id,"name" => name, "public_description" => public_description }}
-    response = JSON.parse(RestClient.post url,data, "Authorization" => "Bearer #{@@oauth_token}")
+    response = JSON.parse(RestClient.post url,data, "Authorization" => "Bearer #{oauth_token}")
     course= ActiveRecord::Base::Course.find(sis_course_id)
     course.update_attributes(:lms_id => response["id"])
   end  
