@@ -4,14 +4,10 @@ module CanvasREST
     :primary_email, :locale, :last_login, :favorites,
     :groups, :courses, :conversations
 
-    def create_user(account_id,name,unique_id,password,api_root_url,oauth_token)
-      url = "#{api_root_url}/accounts/#{account_id}/users"
+    def create_user(account_id,name,unique_id,password)
+      url = "#{@@api_root_url}/accounts/#{account_id}/users"
       data = {"user" => { "name" => name },"pseudonym" =>{"unique_id" => unique_id,"password" =>password}}
-      response=JSON.parse(RestClient.post url,data, "Authorization" => "Bearer #{oauth_token}")
-      print "Response:#{response.inspect}"
-      @user= ActiveRecord::Base::User.find_by_email(unique_id)
-      print "User:#{@user.inspect}"
-      @user.update_attributes(:lms_id => response["id"])
+      JSON.parse(RestClient.post url,data, "Authorization" => "Bearer #{@@oauth_token}")
     end
 
     def update_user(id,name)
